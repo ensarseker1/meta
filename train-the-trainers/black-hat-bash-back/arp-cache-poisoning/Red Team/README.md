@@ -22,7 +22,12 @@ Essentially, we will be performing an *ARP spoofing* attack. As this behavior is
 
 # Bill of materials
 
-> :construction: TK-TODO
+This folder contains the following files and folders:
+
+* `README.md` - This file.
+* `AnarchoTechNYC-RedTeam.png` - The wallpaper for the Red Team desktop machine.
+
+See the [folder just above this one](https://github.com/AnarchoTechNYC/meta/tree/master/train-the-trainers/black-hat-bash-back/arp-cache-poisoning) for the materials necessary for performing this exercise.
 
 # Prerequisites
 
@@ -30,19 +35,74 @@ Essentially, we will be performing an *ARP spoofing* attack. As this behavior is
 
 # Set up
 
-> :construction: TK-TODO
+1. After cloning the repo, run a `vagrant up` to load the configured Vagrant multi-machines.
+1. Once they are running, move to the VirtualBox GUI and load any of the machines you're using for the given exercise.
+1. Click or press `Enter` to be prompted for a login screen. Use username `vagrant` and password `vagrant` to log in.
+1. For desktop machines, immediately run `startx` to get into a GUI desktop. This will only have to be run the first time you're launching the machines. Reloading the virtual machines will make it so that they automatically enter a GUI login the next time.
+1. Once the login screen appears, select the `vagrant` user. Login using the password `vagrant`. Do this for both machines.
 
 # Practice
 
 > :construction: TK-TODO
 
-## Introduction
+## "I, Spy"
 
-> :construction: TK-TODO
+### Requires:
 
-## :construction: TK-TODO
+* `red` (red desktop)
+* `blue_desktop` (blue desktop)
 
-A demo of performing an ARP cache poisoning attack.
+### Instructions
+
+In this scenario, you will be using the `ettercap` tool to quietly monitor the behavior of an unsavory character by intercepting his traffic and seeing what he sees in his browser window. You'll do this using `ettercap`'s plugin, `remote_browser`. Most of your actions will happen from `red`, since you are acting as an attacker.
+
+1. Open a terminal on `red`.
+    1. Click the LXDE icon in the bottom left hand corner. Hover over `System Tools` and select a terminal, such as `LXTerminal`.
+1. Correctly configure your `etter.conf` file.
+    1. First, run `id` to get your `uid` (user ID) and `gid` (group ID). (The results should look like, `uid=1000(vagrant) gid=1000(vagrant)`, for example.)
+    1. Using your favorite text editor, edit `/etc/ettercap/etter.conf` file. (You will have to `sudo` this.)
+    1. Under `ec_uid`, set your `uid`. 
+    1. Under `ec_gid`, set your `gid`. 
+    1. Under `remote_browser`, set `remote_browser = sudo -u vagrant xdg-open http://%host%url`.
+
+> :construction: TK-TODO - The following should have a better spot.
+
+Targets are specified as `[MAC address]/[IPv4 range]/[IPv6 range]/[port range]`.
+
+The three delimiting slashes are required, the values are not. A missing value means "any." If `ettercap` complains about the "wrong number" of slashes (`/`), you may have a copy that does not have IPv6 support. See `ettercap -h | grep ^TARGET` to check target syntax.
+
+Now that Ettercap is configured properly, we're going to run our first command with the tool. This first run is important, as it populates the host list by performing an ARP scan. In other words, it lets Ettercap explore the surroundings to get a sense of what is out there. Ettercap won't work prior to doing this first run; you'll get a `FATAL: Arp poisoning needs a non empty hosts list` error. This first run therefore won't be "silent." We'll run Ettercap using the following options:
+
+
+1. Launch `ettercap` with the following options:
+    * `-T` - Launch Ettercap in "text interface" mode. (Equivalent: `--text`)
+    * `-i enp0s8` - Tells Ettercap which network interface to use; in this case, we're using `enp0s8`. To double-check your network interfaces, run `ip a`.
+    * `--quiet` - Do not print packet output. (Horribly confusing when combined with `--silent`, which does something totally different!)
+    * `--mitm` - Specifies to Ettercap to perform a "machine in the middle" attack. What this really means is that Ettercap is going to go from "sniffing" mode to actively intercepting packets by redirecting the ones it finds back to itself. 
+    * `arp:remote` - > :construction: TK-TODO: ?
+    * `/172.33.44.50//` - Target 1: Allowing for any MAC address, providing the victim machine's IPv4 address, allowing for any IPv6 address (here left empty), allowing for any port.
+    * `/172.33.44.10//80` - Target 2: Allowing for any MAC address, providing the router's IPv4 address, allowing for any IPv6 address (here left empty), allowing for the default HTTP port (`80`).
+
+Our final command for this pass should look like this:
+
+         ```
+         sudo ettercap -T -i enp0s8 --quiet --mitm arp:remote /172.22.33.50// /172.22.33.10//80
+         ```
+
+Now that Ettercap has got a sense of its surroundings, let's use it to perform the spoof. Using the same options as above (hint: hit the up arrow key on your keyboard to get the full command back), tack on the following options:
+
+    * `--plugin remote_browser` - Specifies the use of the `remote_browser` plugin, which will enable us to visualize the live browsing of the victim as the packets are intercepted by Ettercap.
+    * `--silent` - Do not perform an (additional, at this point) ARP scan of the LAN. We just did that!
+    * `--quiet` - Once again, do not print packet output.
+
+Our final command should look like this:
+
+         ```
+         sudo ettercap -T -i enp0s8 --quiet --silent --mitm arp:remote --plugin remote_browser /172.22.33.50// /172.22.33.10/80
+         ```
+
+### Introduction
+
 
 Don't forget to spoof your own hardware address first:
 
@@ -84,6 +144,7 @@ dns-sd -G v4 $VICTIM_mDNS # Resolve (via mDNS) the server's domain name.
 sudo ifconfig $INTERFACE ${VICTIM_IP}/24 alias
 # GNU/Linux users will probably want to do this instead:
 #ip address add ${VICTIM_IP}/24 dev $INTERFACE
+
 
 # Now that we know the server's IP address, let's note its MAC address.
 # If it responds to ICMP echo requests, `ping` will show us output:
@@ -145,18 +206,6 @@ arpspoof $VICTIM_IP
 > 
 > Automate portions of the above with tooling. Ettercap and Bettercap are the famous tools for this:
 > 
-> * Old demo of Ettercap's `remote_browser` plugin:
->     1. Make sure you have an appropriately configured `etter.conf`:
->         * Set `ec_uid` and `ec_gid` to user ID and group ID number you want Ettercap to become, e.g., `ec_uid = 1000`
->         * Set `remote_browser` to a command that makes sense, such as opening your Web browser, e.g., `remote_browser = "sudo -u vagrant xdg-open http://%host%url"`
->     1. Launch Ettercap in `--text` interface mode, performing an ARP MITM attack that also snarfs packets bound for remote networks (`--mitm arp:remote`) with the `--plugin` for the `remote_browser` activated and a chosen target:
->         ```sh
->         # Targets are specified as `[MAC address]/[IPv4 range]/[IPv6 range]/[port range]`
->         # The three delimiting slashes are required, the values are not. A missing value means "any."
->         # If `ettercap` complains about the "wrong number" of slashes (`/`), you may have
->         # a copy that does not have IPv6 support. See `ettercap -h | grep ^TARGET` to check target syntax.
->         sudo ettercap --text --quiet --mitm arp:remote --plugin remote_browser /172.22.33.50// /172.22.33.10/80
->         ```
 > * Quick demo of Bettercap's "ARP ban" (spoofs the gateway's MAC address) that knocks a device off the LAN:
 >     1. Launch `bettercap` with `sudo bettercap`
 >     1. Find a target: `net.show`
@@ -170,4 +219,3 @@ arpspoof $VICTIM_IP
 
 # Additional references
 
-> :construction: TK-TODO
