@@ -11,7 +11,12 @@ Essentially, we will be performing an *ARP spoofing* attack. As this behavior is
 1. [Prerequisites](#prerequisites)
 1. [Set up](#set-up)
 1. [Practice](#practice)
-    1. [Introduction](#introduction)
+    1. ["I, Spy"](#i-spy)
+        1. [Requires](#requires)
+        1. [Introduction](#introduction)
+        1. [Getting started](#getting-started)
+        1. [Launching the attack](#launching-the-attack)
+        1. [Clean up](#clean-up)
 1. [Defenses](#defenses)
 1. [Discussion](#discussion)
 1. [Additional references](#additional-references)
@@ -47,14 +52,27 @@ See the [folder just above this one](https://github.com/AnarchoTechNYC/meta/tree
 
 ## "I, Spy"
 
+Don't forget to spoof your own hardware address first:
+
+* [SimpleSpoofMAC](https://github.com/meitar/SimpleSpoofMAC)
+
+(Interestingly, this can also be accomplished using Bettercap's `mac.changer` module, should one be using Bettercap. Run:
+
+    sudo bettercap
+    mac.changer on
+    
+ ...however, we aren't using Bettercap for this exercise.)
+
 ### Requires:
 
 * `red` (red desktop)
 * `blue_desktop` (blue desktop)
 
-### Instructions
+### Introduction
 
 In this scenario, you will be using the `ettercap` tool to quietly monitor the behavior of an unsavory character by intercepting his traffic and seeing what he sees in his browser window. You'll do this using `ettercap`'s plugin, `remote_browser`. Most of your actions will happen from `red`, since you are acting as an attacker.
+
+### Getting started
 
 1. Open a terminal on `red`.
     1. Click the LXDE icon in the bottom left hand corner. Hover over `System Tools` and select a terminal, such as `LXTerminal`.
@@ -71,8 +89,9 @@ Targets are specified as `[MAC address]/[IPv4 range]/[IPv6 range]/[port range]`.
 
 The three delimiting slashes are required, the values are not. A missing value means "any." If `ettercap` complains about the "wrong number" of slashes (`/`), you may have a copy that does not have IPv6 support. See `ettercap -h | grep ^TARGET` to check target syntax.
 
-Now that Ettercap is configured properly, we're going to run our first command with the tool. This first run is important, as it populates the host list by performing an ARP scan. In other words, it lets Ettercap explore the surroundings to get a sense of what is out there. Ettercap won't work prior to doing this first run; you'll get a `FATAL: Arp poisoning needs a non empty hosts list` error. This first run therefore won't be "silent." We'll run Ettercap using the following options:
+### Launching the attack
 
+Now that Ettercap is configured properly, we're going to run our first command with the tool. This first run is important, as it populates the host list by performing an ARP scan. In other words, it lets Ettercap explore the surroundings to get a sense of what is out there. Ettercap won't work prior to doing this first run; you'll get a `FATAL: Arp poisoning needs a non empty hosts list` error. This first run therefore won't be "silent." We'll run Ettercap using the following options:
 
 1. Launch `ettercap` with the following options:
 
@@ -104,20 +123,11 @@ Our final command should look like this:
          
          sudo ettercap --text -i enp0s8 --quiet --silent --mitm arp:remote 
          --plugin remote_browser /172.22.33.50// /172.22.33.10/80
+
+### Clean up
+
+> :construction: TK-TODO
          
-
-### Introduction
-
-
-Don't forget to spoof your own hardware address first:
-
-* [SimpleSpoofMAC](https://github.com/meitar/SimpleSpoofMAC)
-
-This can also be done using Bettercap's `mac.changer` module, should one be using Bettercap. Run:
-
-    sudo bettercap
-    mac.changer on
-
 ```sh
 # Some assumptions for this demo:
 VICTIM_IP=192.168.9.10
