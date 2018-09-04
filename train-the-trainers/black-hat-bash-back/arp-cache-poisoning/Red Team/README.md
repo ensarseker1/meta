@@ -75,6 +75,7 @@ Now that Ettercap is configured properly, we're going to run our first command w
 
 
 1. Launch `ettercap` with the following options:
+
 * `-T` - Launch Ettercap in "text interface" mode. (Equivalent: `--text`)
 * `-i enp0s8` - Tells Ettercap which network interface to use; in this case, we're using `enp0s8`. To double-check your network interfaces, run `ip a`.
 * `--quiet` - Do not print packet output. (Horribly confusing when combined with `--silent`, which does something totally different!)
@@ -92,9 +93,11 @@ Our final command for this pass should look like this:
 
 Now that Ettercap has got a sense of its surroundings, let's use it to perform the spoof. Using the same options as above (hint: hit the up arrow key on your keyboard to get the full command back), tack on the following options:
 
-    * `--plugin remote_browser` - Specifies the use of the `remote_browser` plugin, which will enable us to visualize the live browsing of the victim as the packets are intercepted by Ettercap.
-    * `--silent` - Do not perform an (additional, at this point) ARP scan of the LAN. We just did that!
-    * `--quiet` - Once again, do not print packet output.
+* `--plugin remote_browser` - Specifies the use of the `remote_browser` plugin, which will enable us to visualize the live browsing of the victim as the packets are intercepted by Ettercap.
+
+* `--silent` - Do not perform an (additional, at this point) ARP scan of the LAN. We just did that!
+
+* `--quiet` - Once again, do not print packet output.
 
 Our final command should look like this:
 
