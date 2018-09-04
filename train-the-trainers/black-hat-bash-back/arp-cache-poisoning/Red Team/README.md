@@ -12,8 +12,8 @@ Essentially, we will be performing an *ARP spoofing* attack. As this behavior is
 1. [Set up](#set-up)
 1. [Practice](#practice)
     1. ["I, Spy"](#i-spy)
-        1. [Requires](#requires)
         1. [Introduction](#introduction)
+        1. [Requires](#requires)
         1. [Getting started](#getting-started)
         1. [Launching the attack](#launching-the-attack)
         1. [Clean up](#clean-up)
@@ -52,6 +52,10 @@ See the [folder just above this one](https://github.com/AnarchoTechNYC/meta/tree
 
 ## "I, Spy"
 
+### Introduction
+
+In this scenario, you will be using the `ettercap` tool to quietly monitor the behavior of an unsavory character by intercepting his traffic and seeing what he sees in his browser window. You'll do this using `ettercap`'s plugin, `remote_browser`. Most of your actions will happen from `red`, since you are acting as an attacker.
+
 Don't forget to spoof your own hardware address first:
 
 * [SimpleSpoofMAC](https://github.com/meitar/SimpleSpoofMAC)
@@ -62,15 +66,16 @@ Don't forget to spoof your own hardware address first:
     mac.changer on
     
  ...however, we aren't using Bettercap for this exercise.)
+ 
+ Some things that are assumed in this scenario:
+ 
+ * The victim machine's IPv4 address is `172.22.33.50`.
+ * The router's IPv4 address is `172.22.33.10`.
 
 ### Requires:
 
 * `red` (red desktop)
 * `blue_desktop` (blue desktop)
-
-### Introduction
-
-In this scenario, you will be using the `ettercap` tool to quietly monitor the behavior of an unsavory character by intercepting his traffic and seeing what he sees in his browser window. You'll do this using `ettercap`'s plugin, `remote_browser`. Most of your actions will happen from `red`, since you are acting as an attacker.
 
 ### Getting started
 
