@@ -27,7 +27,7 @@ In this scenario, these are the tools that must be used by each of the relevant 
 
 **Narc:** Blue desktop (defense)
 
-#### The scenario
+### The scenario
 
 ### Offense
 
