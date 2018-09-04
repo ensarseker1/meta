@@ -24,6 +24,7 @@ The following scenarios present slightly different campaigns, each of which can 
 In this scenario, these are the tools that must be used by each of the relevant roles. Decide which role you and your teammate(s) will choose and delegate the appropriate tools, or else just play both parts yourself!
 
 **Comrades:** Red desktop (offense)
+
 **Narc:** Blue desktop (defense)
 
 #### The scenario
