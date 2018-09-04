@@ -75,13 +75,13 @@ Now that Ettercap is configured properly, we're going to run our first command w
 
 
 1. Launch `ettercap` with the following options:
-    * `-T` - Launch Ettercap in "text interface" mode. (Equivalent: `--text`)
-    * `-i enp0s8` - Tells Ettercap which network interface to use; in this case, we're using `enp0s8`. To double-check your network interfaces, run `ip a`.
-    * `--quiet` - Do not print packet output. (Horribly confusing when combined with `--silent`, which does something totally different!)
-    * `--mitm` - Specifies to Ettercap to perform a "machine in the middle" attack. What this really means is that Ettercap is going to go from "sniffing" mode to actively intercepting packets by redirecting the ones it finds back to itself. 
-    * `arp:remote` - > :construction: TK-TODO: ?
-    * `/172.33.44.50//` - Target 1: Allowing for any MAC address, providing the victim machine's IPv4 address, allowing for any IPv6 address (here left empty), allowing for any port.
-    * `/172.33.44.10//80` - Target 2: Allowing for any MAC address, providing the router's IPv4 address, allowing for any IPv6 address (here left empty), allowing for the default HTTP port (`80`).
+* `-T` - Launch Ettercap in "text interface" mode. (Equivalent: `--text`)
+* `-i enp0s8` - Tells Ettercap which network interface to use; in this case, we're using `enp0s8`. To double-check your network interfaces, run `ip a`.
+* `--quiet` - Do not print packet output. (Horribly confusing when combined with `--silent`, which does something totally different!)
+* `--mitm` - Specifies to Ettercap to perform a "machine in the middle" attack. What this really means is that Ettercap is going to go from "sniffing" mode to actively intercepting packets by redirecting the ones it finds back to itself. 
+* `arp:remote` - > :construction: TK-TODO: ?
+* `/172.33.44.50//` - Target 1: Allowing for any MAC address, providing the victim machine's IPv4 address, allowing for any IPv6 address (here left empty), allowing for any port.
+* `/172.33.44.10//80` - Target 2: Allowing for any MAC address, providing the router's IPv4 address, allowing for any IPv6 address (here left empty), allowing for the default HTTP port (`80`).
 
 Our final command for this pass should look like this:
 
