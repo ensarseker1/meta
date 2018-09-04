@@ -35,7 +35,7 @@ You and your comrades have recently discovered that a local café is a favorite 
 
 You've recently been learning about ARP cache poisoning, and have decided to use the `ettercap` tool to quietly gather information on the dude and spy on his browser window.
 
-Proceed with this campaign: ["I, Spy"](https://github.com/AnarchoTechNYC/meta/tree/aubrel-arp-spoofing-lab/train-the-trainers/black-hat-bash-back/arp-cache-poisoning/Red%20Team)
+Proceed with this campaign: ["I, Spy"](https://github.com/AnarchoTechNYC/meta/tree/aubrel-arp-spoofing-lab/train-the-trainers/black-hat-bash-back/arp-cache-poisoning/Red%20Team#i-spy)
 
 ### Defense
 
