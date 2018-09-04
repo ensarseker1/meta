@@ -33,9 +33,9 @@ In this scenario, these are the tools that must be used by each of the relevant 
 
 You and your comrades have recently discovered that a local café is a favorite haunt of a known narc. Suspecting that he may be doing his tattling from this very café, you visit the spot (taking turns between people, so as not to become conspicuous) staking out the place until you nail down his schedule. You decide you want to get more information about what this guy's been up to, but to do it in such a way that he probably won't notice.
 
-You've recently learning about ARP cache poisoning, and have decided to use the `ettercap` tool to quietly gather information on the dude and spy on his browser window.
+You've recently been learning about ARP cache poisoning, and have decided to use the `ettercap` tool to quietly gather information on the dude and spy on his browser window.
 
-Proceed with this campaign: ["I, Spy"](https://github.com/AnarchoTechNYC/meta/tree/master/train-the-trainers/black-hat-bash-back/arp-cache-poisoning/Red%20Team#i-spy)
+Proceed with this campaign: ["I, Spy"](https://github.com/AnarchoTechNYC/meta/tree/aubrel-arp-spoofing-lab/train-the-trainers/black-hat-bash-back/arp-cache-poisoning/Red%20Team)
 
 ### Defense
 
