@@ -6,6 +6,8 @@ You could think of connecting to a LAN at your favorite bar, in order to access 
 
 Using Nmap, a tool born in the early '90s, we'll use this workshop as a way to swan dive into the waves and discover what's swimming just underneath the surface of a network. You'll never look at your Internet café the same way again!
 
+> :construction: TK-TODO: Introduce a few more technical details on what this lab will be about.
+
 # Contents
 
 1. [Objectives](#objectives)
