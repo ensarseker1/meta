@@ -2,7 +2,13 @@
 
 # Contents
 
-> :construction: TK-TODO
+1. [Objectives](#objectives)
+1. [Bill of materials](#bill-of-materials)
+1. [Prerequisites](#prerequisites)
+1. [Set up](#set-up)
+1. [Practice](#practice)
+1. [Discussion](#discussion)
+1. [Additional references](#additional-references)
 
 # Objectives
 
@@ -31,4 +37,14 @@
 
 > :construction: TK-TODO
 
+# Practice
+
+> :construction: TK-TODO
+
+# Discussion
+
+> :construction: TK-TODO
+
 # Additional references
+
+> :construction: TK-TODO
