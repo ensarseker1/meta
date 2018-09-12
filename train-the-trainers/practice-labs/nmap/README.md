@@ -4,7 +4,7 @@ Every time you visit your local café to make use of their free Internet access,
 
 You could think of connecting to a LAN at your favorite bar in order to access the Internet as being kind of like jumping into a sailboat to sail across the ocean. You may be familiar with the surface of the ocean -- where your favorite memes, e-mail, blogs, and news sources all float across the surface on the waves. But what do you know about your own LAN and the devices on it? Or, moreover, what do you know about the machine you're actually connecting to when you go to puppydog.party?
 
-Using Nmap, a tool born in the early '90s, we'll use this workshop as a way to swan dive into the waves and discover what's swimming just underneath the surface of a network. You'll never look at your Internet café the same way again!
+Using Nmap, a tool born in the early '90s, we'll use this workshop as a way to swan dive into the waves and discover what's swimming just underneath the surface of a network. We'll learn how to speak the basic level of the secret language these machines are speaking when they talk to one another. You'll never look at your Internet café the same way again!
 
 > :construction: TK-TODO: Introduce a few more technical details on what this lab will be about.
 
